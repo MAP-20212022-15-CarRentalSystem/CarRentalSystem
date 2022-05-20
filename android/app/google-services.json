@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "960132228939",
+    "project_id": "car-rental-system-ace63",
+    "storage_bucket": "car-rental-system-ace63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960132228939:android:6e7c5f3d75f518386a6ace",
+        "android_client_info": {
+          "package_name": "com.example.flutterproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960132228939-nct97fcmt32t82lv5c3l66voblpuqpur.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ8z2NrJ0J_bpcqjrOjqxNVZrVaEyNuac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "960132228939-nct97fcmt32t82lv5c3l66voblpuqpur.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
