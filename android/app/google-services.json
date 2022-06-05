@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1089860958388",
+    "project_id": "hopon-e8fad",
+    "storage_bucket": "hopon-e8fad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1089860958388:android:51cb313037acb3657f7fe1",
+        "android_client_info": {
+          "package_name": "com.example.hopon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1089860958388-1saqekqvmiejrfk2cf56r8g084d0cgn6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwfIBaNHoFyAmr7O2EfDgfYlwJpZCRBTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1089860958388-1saqekqvmiejrfk2cf56r8g084d0cgn6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
