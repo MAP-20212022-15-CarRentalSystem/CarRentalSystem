@@ -56,7 +56,7 @@ class FirebaseFunctions {
     }
   }
 
-  //upload image
+  // upload image
 
   Future<String> uploadVehicleInfo(
       Map<String, dynamic> data, File localFile, BuildContext context) async {
