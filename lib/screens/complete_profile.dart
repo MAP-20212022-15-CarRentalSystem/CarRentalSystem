@@ -20,7 +20,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
   TextEditingController _bloodController = TextEditingController();
   TextEditingController _contactController = TextEditingController();
 
-  // String _imageUrl;
+  //  String _imageUrl;
 
   AppUser user = AppUser();
 
