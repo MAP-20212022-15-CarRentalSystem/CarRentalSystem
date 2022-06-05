@@ -14,4 +14,3 @@ User currentFirebaseUser = FirebaseAuth.instance.currentUser;
 
 DatabaseReference tripRequestRef;
 StreamSubscription<Position> homeTabPositionStream;
-
