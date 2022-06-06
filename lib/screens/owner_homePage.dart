@@ -12,7 +12,6 @@ import 'package:vehicle_sharing_app/models/user.dart';
 import 'package:vehicle_sharing_app/services/authentication_service.dart';
 import 'package:vehicle_sharing_app/services/firebase_services.dart';
 import 'package:vehicle_sharing_app/widgets/confirmSheet.dart';
-
 import '../widgets/widgets.dart';
 import 'car_registration.dart';
 import 'home_page.dart';
