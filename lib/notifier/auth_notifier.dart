@@ -13,7 +13,7 @@ class AuthNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  //Test
+  //Test.
   User _userDetails;
 
   User get userDetails => _userDetails;
