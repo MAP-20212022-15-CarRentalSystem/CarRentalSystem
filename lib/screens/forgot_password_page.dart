@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:toast/toast.dart';
 import 'package:vehicle_sharing_app/screens/login_page.dart';
-
 import '../widgets/custom_text_field.dart';
 import '../widgets/widgets.dart';
 
