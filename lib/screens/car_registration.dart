@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:vehicle_sharing_app/models/user.dart';
@@ -40,7 +39,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
   }
 
   // _save() async {
-  //   FirebaseFunctions().uploadFoodAndImages(owner, imageFile, context);
+  //     FirebaseFunctions().uploadFoodAndImages(owner, imageFile, context);
   // }
 
   FirebaseFunctions firebaseFunctions = FirebaseFunctions();
@@ -125,7 +124,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
                             ),
                           ),
                     SizedBox(
-                      height: 0,
+                      height: 0.0,
                     ),
                     InputFormField(
                       fieldName: 'Model Name',
