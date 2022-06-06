@@ -133,7 +133,7 @@ class ValidationService {
     return null;
   }
 
-  // Vehicle Details Registration
+  // Vehicle Details Registration.
 
   String modelNameValidator(String value) {
     if (value == null || value.isEmpty) {
