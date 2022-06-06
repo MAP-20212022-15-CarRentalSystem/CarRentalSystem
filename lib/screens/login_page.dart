@@ -2,6 +2,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+
 import 'package:vehicle_sharing_app/screens/forgot_password_page.dart';
 import 'package:vehicle_sharing_app/screens/home_page.dart';
 import 'package:vehicle_sharing_app/screens/signup_page.dart';
