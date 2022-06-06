@@ -18,7 +18,6 @@ import 'package:vehicle_sharing_app/screens/ride_history_page.dart';
 import 'package:vehicle_sharing_app/services/authentication_service.dart';
 import 'package:vehicle_sharing_app/services/firebase_services.dart';
 import 'package:vehicle_sharing_app/widgets/widgets.dart';
-
 import '../assistant/fireHelper.dart';
 import '../globalvariables.dart';
 import '../models/nearbyCar.dart';
