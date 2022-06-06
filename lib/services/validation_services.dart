@@ -11,7 +11,7 @@ class ValidationService {
     //
     // if (!regExp.hasMatch(value)) {
     //   // print('here');
-    //   return 'Please enter a valid email';
+    //    return 'Please enter a valid email';
     // }
 
     return null;
