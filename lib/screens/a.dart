@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vehicle_sharing_app/globalvariables.dart';
 import 'package:vehicle_sharing_app/widgets/widgets.dart';
-
 import '../services/firebase_services.dart';
 import 'car_details.dart';
 
