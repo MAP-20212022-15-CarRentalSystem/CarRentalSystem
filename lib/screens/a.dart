@@ -86,6 +86,19 @@ class _AllCarsState extends State<AllCars> {
                                     ),
                                   ],
                                 ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    await FirebaseFirestore.instance
+                                        .collection('AllCars')
+                                        .doc(snapshot.data.docs[i].id)
+                                        .delete();
+                                  },
+                                  child: Icon(
+                                    Icons.delete,
+                                    size: 20,
+                                    color: Colors.red,
+                                  ),
+                                )
                               ],
                             ),
                           ],
