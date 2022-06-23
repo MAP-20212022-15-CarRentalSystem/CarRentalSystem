@@ -19,7 +19,70 @@ import 'login_page.dart';
 import 'owner_history.dart';
 import 'profile_page.dart';
 
-@override
+class DisplayMap extends StatefulWidget {
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+
+  @override
+  _DisplayMapState createState() => _DisplayMapState();
+}
+
+class _DisplayMapState extends State<DisplayMap> {
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  void showSnackBar(String title) {
+    final snackbar = SnackBar(
+      content: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 15),
+      ),
+    );
+    scaffoldKey.currentState.showSnackBar(snackbar);
+  }
+
+  Completer<GoogleMapController> _controller = Completer();
+  GoogleMapController mapController;
+
+  Position currentPosition;
+  AppUser userData;
+
+  DatabaseReference tripRequestRef;
+  var locationOptions = LocationOptions(
+      accuracy: LocationAccuracy.bestForNavigation, distanceFilter: 4);
+
+  String availabilityText = 'Give on rent';
+  Color availabilityColor = Colors.black;
+  bool isAvailable = false;
+  String exist = 'donotexist';
+
+  void setupPositionLocator() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    currentPosition = position;
+
+    LatLng pos = LatLng(position.latitude, position.longitude);
+    CameraPosition cp = CameraPosition(target: pos, zoom: 15);
+    mapController.animateCamera(CameraUpdate.newCameraPosition(cp));
+  }
+
+  @override
+  void initState() {
+    getUser();
+    setupPositionLocator();
+    super.initState();
+  }
+
+  getUser() async {
+    userData = await FirebaseFunctions().getUser();
+    // setState(() {
+    //   userData;
+    // });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -288,7 +351,7 @@ import 'profile_page.dart';
       ),
     );
   }
-  
+
   /// Check If Vehicle Info Exists
   Future<void> checkIfDocExists() async {
     try {
