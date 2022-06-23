@@ -28,7 +28,56 @@ import 'login_page.dart';
 import 'owner_homePage.dart';
 import 'search_dropOff.dart';
 
+_selectPickupDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedPickupDate, // Refer step 1
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
+      initialEntryMode: DatePickerEntryMode.input,
+      selectableDayPredicate: _decideWhichDayToEnable,
+      helpText: 'Select pickup date', // Can be used as title
+      cancelText: 'Not now',
+      confirmText: 'Done',
+      errorFormatText: 'Enter valid date',
+      errorInvalidText: 'Enter date in valid range',
+      fieldLabelText: 'Pickup date',
+      fieldHintText: 'Month/Date/Year',
+    );
+    if (picked != null && picked != selectedPickupDate)
+      setState(() {
+        selectedPickupDate = picked;
+      });
+  }
 
+  _selectDropOffDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDropOffDate, // Refer step 1
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
+      initialEntryMode: DatePickerEntryMode.input,
+      selectableDayPredicate: _decideWhichDayToEnable,
+      helpText: 'Select dropOff date', // Can be used as title
+      cancelText: 'Not now',
+      confirmText: 'Done',
+      errorFormatText: 'Enter valid date',
+      errorInvalidText: 'Enter date in valid range',
+      fieldLabelText: 'DropOff date',
+      fieldHintText: 'Month/Date/Year',
+    );
+    if (picked != null && picked != selectedDropOffDate)
+      setState(() {
+        selectedDropOffDate = picked;
+      });
+  }
+
+  @override
+  void initState() {
+    // locatePosition();
+    super.initState();
+    checkIfUserHasCar();
+  }
 
   Future<void> getPlaceDirection() async {
     var initialPos =
