@@ -8,6 +8,37 @@ class ValidationService {
     return null;
   }
 
+  String passwordValidator(String value) {
+    if (value == null) {
+      return 'Please enter a valid password';
+    }
+
+    if (value.length < 8) {
+      print('pass');
+      return 'Please enter a password with more than 8 characters';
+    }
+
+    String pattern =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regExp = new RegExp(pattern);
+
+    if (!regExp.hasMatch(value)) {
+      return 'Please enter a valid password';
+    }
+
+    password = value;
+    return null;
+  }
+
+  String rePasswordValidator(String rePassword) {
+    if (password.compareTo(rePassword) != 0) {
+      print('here');
+      return "Your password doesn't match";
+    }
+
+    return null;
+  }
+
   String ageValidator(String value) {
     if (value == null || value.isEmpty) {
       return 'Please enter a valid age';
