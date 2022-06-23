@@ -28,7 +28,173 @@ import 'login_page.dart';
 import 'owner_homePage.dart';
 import 'search_dropOff.dart';
 
-_selectPickupDate(BuildContext context) async {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  Completer<GoogleMapController> _controllerGoogleMap = Completer();
+  GoogleMapController newGoogleMapController;
+
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+  DirectionDetails tripDirectionDetails;
+
+  List<LatLng> pLinesCoordinates = [];
+  Set<Polyline> polylineSet = {};
+
+  double bottomPaddingOfMap = 0;
+
+  Set<Marker> markerSet = {};
+  Set<Circle> circleSet = {};
+
+  void geolocator = Geolocator();
+
+  double rideDetailContainerHeight = 0;
+  double searchDetailContainerHeight = 300;
+
+  bool drawerOpen = true;
+  String finalDestination = '';
+  String initialLocation = '';
+  bool showEditCar = false;
+
+  List nearbyCarId = [];
+
+  void displayRideDetailContainer() async {
+    await getPlaceDirection();
+    setState(() {
+      searchDetailContainerHeight = 0;
+      rideDetailContainerHeight = 330;
+      bottomPaddingOfMap = 320;
+      drawerOpen = false;
+    });
+  }
+
+  void checkIfUserHasCar() async {
+    var data = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .collection('vehicle_details')
+        .doc(FirebaseAuth.instance.currentUser.uid)
+        .get();
+
+    if (data.exists) {
+      setState(() {
+        showEditCar = true;
+      });
+    }
+  }
+
+  resetApp() {
+    setState(() {
+      drawerOpen = true;
+      searchDetailContainerHeight = 280;
+      rideDetailContainerHeight = 0;
+      bottomPaddingOfMap = 270;
+
+      polylineSet.clear();
+      markerSet.clear();
+      pLinesCoordinates.clear();
+      circleSet.clear();
+
+      // locatePosition();
+    });
+  }
+
+  void locatePosition() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
+    currentPosition = position;
+    LatLng latlngPosition = LatLng(position.latitude, position.longitude);
+
+    CameraPosition cameraPosition =
+        new CameraPosition(target: latlngPosition, zoom: 14);
+    newGoogleMapController
+        .moveCamera(CameraUpdate.newCameraPosition(cameraPosition));
+    String address =
+        await AssistantMethods.searchCoordinateAddress(position, context);
+    Provider.of<AppData>(context, listen: false).pickUpLocation.placeName =
+        address;
+    print('address of current place is : $address');
+
+    if (address == '') {
+      print('Nulladdress');
+    }
+    print('Your address::' + address);
+    startGeofireListener();
+  }
+
+  void startGeofireListener() {
+    // print(currentPosition);
+    Geofire.initialize('carsAvailable');
+    Geofire.queryAtLocation(
+            currentPosition.latitude, currentPosition.longitude, 20)
+        .listen((map) {
+      // print(map);
+      if (map != null) {
+        var callBack = map['callBack'];
+
+        //latitude will be retrieved from map['latitude']
+        //longitude will be retrieved from map['longitude']
+
+        switch (callBack) {
+          case Geofire.onKeyEntered:
+            NearbyCar nearbyCar = NearbyCar();
+            nearbyCar.key = map['key'];
+            nearbyCar.latitude = map['latitude'];
+            nearbyCar.longitude = map['longitude'];
+
+            nearbyCarId.add(map['key']);
+            FireHelper.nearbyCarList.add(nearbyCar);
+            break;
+
+          case Geofire.onKeyExited:
+            int index =
+                nearbyCarId.indexWhere((element) => element.key == map['key']);
+            nearbyCarId.removeAt(index);
+            FireHelper.removeFromList(map['key']);
+            break;
+
+          case Geofire.onKeyMoved:
+            // Update your key's location
+
+            NearbyCar nearbyCar = NearbyCar();
+            nearbyCar.key = map['key'];
+            nearbyCar.latitude = map['latitude'];
+            nearbyCar.longitude = map['longitude'];
+
+            FireHelper.updateNearByLocation(nearbyCar);
+            break;
+
+          case Geofire.onGeoQueryReady:
+            // All Intial Data is loaded
+            print("Firehelper length: ${FireHelper.nearbyCarList.length}");
+
+            break;
+        }
+      }
+      NearbyCar nearbyCar = NearbyCar();
+    });
+  }
+
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+  AppUser userData;
+
+  DateTime selectedPickupDate = DateTime.now();
+  DateTime selectedDropOffDate = DateTime.now();
+
+  bool _decideWhichDayToEnable(DateTime day) {
+    if ((day.isAfter(DateTime.now().subtract(Duration(days: 1))) &&
+        day.isBefore(DateTime.now().add(Duration(days: 10))))) {
+      return true;
+    }
+    return false;
+  }
+
+  _selectPickupDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: selectedPickupDate, // Refer step 1
