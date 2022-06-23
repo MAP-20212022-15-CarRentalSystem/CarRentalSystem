@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1016734844278",
+    "project_id": "carrentalsystem-ef6ae",
+    "storage_bucket": "carrentalsystem-ef6ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016734844278:android:6d6b3569d67502a0536657",
+        "android_client_info": {
+          "package_name": "com.example.hopon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016734844278-hpqcd338pq94mip005na7ds84e24f8al.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8XbZm1eqMpQbkfjC92xJJeYdBZ_qTnto"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016734844278-hpqcd338pq94mip005na7ds84e24f8al.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
