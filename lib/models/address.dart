@@ -6,9 +6,10 @@ class Address {
   double longitude;
 
   Address(
-      {this.placeFormattedAddress,
-      this.placeName,
-      this.placeId,
-      this.latitude,
-      this.longitude});
+    required this.placeFormattedAddress,
+    required this.placeName,
+    required this.placeId,
+    required this.latitude,
+    required this.longitude,
+  });
 }
