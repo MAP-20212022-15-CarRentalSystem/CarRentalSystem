@@ -1,152 +1,132 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:car_rental_system/constants/regular_string_constants.dart';
+import 'package:car_rental_system/providers/auth_provider.dart';
+import 'package:car_rental_system/utils/context_less.dart';
+import 'package:car_rental_system/utils/routes.dart';
+import 'package:car_rental_system/widgets/state_widgets.dart';
+import 'package:car_rental_system/widgets/widgets.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:vehicle_sharing_app/screens/complete_profile.dart';
-import 'package:vehicle_sharing_app/screens/login_page.dart';
-import 'package:vehicle_sharing_app/services/authentication_service.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
-import '../widgets/widgets.dart';
-
-class SignUpPage extends StatefulWidget {
+class SignUpPage extends ConsumerWidget {
   @override
-  _SignUpPageState createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
-  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  void showSnackBar(String title) {
-    final snackbar = SnackBar(
-      content: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 15),
-      ),
-    );
-    scaffoldKey.currentState.showSnackBar(snackbar);
-  }
-
-  var emailIdController = TextEditingController();
-
-  var passwordController = TextEditingController();
-
-  var confirmPassController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
     return Scaffold(
-      key: scaffoldKey,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-          child: Column(
-            children: [
-              Text(
-                'Rental Car',
-                style: TextStyle(
-                  fontSize: 50,
-                  letterSpacing: 2,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'MuseoModerno',
-                  // color: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          child: FormBuilder(
+            key: _formKey,
+            child: Column(
+              children: [
+                const Text(
+                  'Rental Car',
+                  style: TextStyle(
+                    fontSize: 50,
+                    letterSpacing: 2,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'MuseoModerno',
+                    // color: Colors.white,
+                  ),
                 ),
-              ),
-              SizedBox(height: 30),
-              InputTextField(
-                controller: emailIdController,
-                label: 'Email-Id',
-                obscure: false,
-                icon: Icon(Icons.email_outlined),
-              ),
-              InputTextField(
-                controller: passwordController,
-                label: 'Password',
-                obscure: true,
-                icon: Icon(Icons.lock),
-              ),
-              InputTextField(
-                controller: confirmPassController,
-                label: 'Confirm Password',
-                obscure: true,
-                icon: Icon(Icons.lock),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  // network connectivity
-                  var connectivityResult =
-                      await Connectivity().checkConnectivity();
-                  if (connectivityResult != ConnectivityResult.mobile &&
-                      connectivityResult != ConnectivityResult.wifi) {
-                    showSnackBar('No Internet connectivity');
-                    return;
-                  }
-                  BuildContext dialogContext;
-                  showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (BuildContext context) {
-                      dialogContext = context;
-                      return ProgressDialog(
-                        status: 'Registering you\nPlease wait',
-                      );
-                    },
-                  );
-
-                  context
-                      .read<AuthenticationService>()
-                      .signUp(
-                        email: emailIdController.text.trim(),
-                        password: passwordController.text.trim(),
-                      )
-                      .then(
-                        (value) => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return CompleteProfile();
-                          }),
+                const SizedBox(height: 30),
+                InputFormField(
+                  fieldName: 'Email-Id',
+                  validator: FormBuilderValidators.compose(
+                    [FormBuilderValidators.required()],
+                  ),
+                  name: AppRSC.acEmail,
+                ),
+                InputFormField(
+                  fieldName: 'Password',
+                  validator: FormBuilderValidators.compose(
+                    [FormBuilderValidators.required()],
+                  ),
+                  obscure: true,
+                  name: AppRSC.acPassword,
+                ),
+                InputFormField(
+                  fieldName: 'Re Type Password',
+                  validator: FormBuilderValidators.compose(
+                    [FormBuilderValidators.required()],
+                  ),
+                  obscure: true,
+                  name: AppRSC.acRePassword,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ref.watch(signUpProvider).map(
+                      initial: (_) => GestureDetector(
+                        onTap: () async {
+                          // network connectivity
+                          final connectivityResult =
+                              await Connectivity().checkConnectivity();
+                          if (connectivityResult != ConnectivityResult.mobile &&
+                              connectivityResult != ConnectivityResult.wifi) {
+                            EasyLoading.showError('No Internet');
+                            return;
+                          }
+                          if (_formKey.currentState != null &&
+                              _formKey.currentState!.saveAndValidate()) {
+                            final fields = _formKey.currentState!.fields;
+                            if (fields[AppRSC.acRePassword]!.value ==
+                                fields[AppRSC.acRePassword]!.value) {
+                              ref.watch(signUpProvider.notifier).signUp(
+                                    fields[AppRSC.acEmail]!.value as String,
+                                    fields[AppRSC.acPassword]!.value as String,
+                                  );
+                            } else {
+                              EasyLoading.showError("Passwords Don't Match");
+                            }
+                          }
+                        },
+                        child: const CustomButton(
+                          text: 'Sign Up',
                         ),
-                      );
-                  // Navigator.pop(dialogContext);
-                },
-                child: CustomButton(
-                  text: 'Sign Up',
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) {
-                      return LoginPage();
-                    }),
-                  );
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Already a registered user?\t',
-                      style: TextStyle(fontSize: 10),
+                      ),
+                      loading: (_) => const LoadingWidget(),
+                      loaded: (_) => const MessageWidget(
+                        msg: 'Success',
+                      ),
+                      error: (_) => ErrorHandleWidget(
+                        error: _.error,
+                      ),
                     ),
-                    Text(
-                      'Login here',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                    ),
-                  ],
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-            ],
+                GestureDetector(
+                  onTap: () {
+                    context.nav.pushNamed(Routes.login);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Already a registered user?\t',
+                        style: TextStyle(fontSize: 10),
+                      ),
+                      Text(
+                        'Login here',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+              ],
+            ),
           ),
         ),
       ),
