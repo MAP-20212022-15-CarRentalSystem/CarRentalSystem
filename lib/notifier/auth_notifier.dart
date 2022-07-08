@@ -21,3 +21,16 @@ class SignUpNotifier extends StateNotifier<ApiState<UserCredential>> {
     }
   }
 }
+
+class ForgotPassNotifier extends StateNotifier<ApiState<String>> {
+  ForgotPassNotifier() : super(const ApiState.initial());
+  Future<void> resetPass(String email) async {
+    state = const ApiState.loading();
+    try {
+      FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      state = const ApiState.loaded(data: 'Success');
+    } catch (e) {
+      state = ApiState.error(error: NetworkExceptions.getErrorMsg(e));
+    }
+  }
+}
