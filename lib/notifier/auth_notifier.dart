@@ -4,6 +4,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+class SignOutNotifier extends StateNotifier<ApiState<String>> {
+  SignOutNotifier() : super(const ApiState.initial());
+  Future<void> signOut() async {
+    state = const ApiState.loading();
+    try {
+      await FirebaseAuth.instance.signOut();
+      EasyLoading.showSuccess('Logged Out');
+      state = const ApiState.loaded(data: 'Success');
+    } catch (e) {
+      state = ApiState.error(error: NetworkExceptions.getErrorMsg(e));
+    }
+  }
+}
+
 class SignUpNotifier extends StateNotifier<ApiState<UserCredential>> {
   SignUpNotifier() : super(const ApiState.initial());
   Future<void> signUp(String email, String password) async {
