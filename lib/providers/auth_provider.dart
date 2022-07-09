@@ -9,11 +9,18 @@ final signOutProvider =
   return SignOutNotifier();
 });
 
+//For Logging In
+final signInProvider =
+    StateNotifierProvider<SignInNotifier, ApiState<UserCredential>>((ref) {
+  return SignInNotifier();
+});
+
 //For Signing Up
 final signUpProvider =
     StateNotifierProvider<SignUpNotifier, ApiState<UserCredential>>((ref) {
   return SignUpNotifier();
 });
+
 //For Resetting Password
 final forgotPassworProvider =
     StateNotifierProvider<ForgotPassNotifier, ApiState<String>>((ref) {
