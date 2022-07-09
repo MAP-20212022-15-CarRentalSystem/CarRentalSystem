@@ -1,18 +1,22 @@
+import 'package:car_rental_system/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'widgets.dart';
 
 class ConfirmSheet extends StatelessWidget {
   final String title;
   final String subtitle;
-  final Function onPressed;
+  final Function() onPressed;
 
-  ConfirmSheet({this.title, this.subtitle, this.onPressed});
+  const ConfirmSheet({
+    required this.title,
+    required this.subtitle,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 220,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
@@ -27,26 +31,27 @@ class ConfirmSheet extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
         child: Column(
           children: [
             Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
               subtitle,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+              style: const TextStyle(fontSize: 14, color: Colors.black54),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(

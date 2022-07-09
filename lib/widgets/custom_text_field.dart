@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-typedef void CustomTextFieldOnChangeCallBack(String text);
+typedef CustomTextFieldOnChangeCallBack = void Function(String text);
 
 class CustomTextField extends StatelessWidget {
   final String fieldTitle;
   final String hint;
   final bool isSecure;
   final Widget prefixIcon;
-  final Widget suffixIcon;
+  final Widget? suffixIcon;
   final bool isShowCursor;
   final bool isReadOnly;
   final int maxLength;
@@ -15,17 +15,17 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final CustomTextFieldOnChangeCallBack onChanged;
 
-  CustomTextField({
-    this.fieldTitle,
-    this.textEditingController,
+  const CustomTextField({
+    required this.fieldTitle,
+    required this.textEditingController,
     this.maxLength = 500,
     this.hint = '',
     this.isSecure = false,
-    this.prefixIcon,
+    required this.prefixIcon,
     this.suffixIcon,
     this.isShowCursor = true,
     this.isReadOnly = false,
-    this.onChanged,
+    required this.onChanged,
     this.textInputType = TextInputType.text,
   });
 
@@ -33,10 +33,9 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    var isMobileLayout = shortestSide < 600;
+    final shortestSide = MediaQuery.of(context).size.shortestSide;
+    final isMobileLayout = shortestSide < 600;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
           margin: EdgeInsets.only(
@@ -51,9 +50,9 @@ class CustomTextField extends StatelessWidget {
             ),
             showCursor: isShowCursor,
             autocorrect: false,
-            controller: this.textEditingController,
-            readOnly: this.isReadOnly,
-            obscureText: this.isSecure,
+            controller: textEditingController,
+            readOnly: isReadOnly,
+            obscureText: isSecure,
             keyboardType: textInputType,
             decoration: InputDecoration(
               counterText: '',
@@ -63,14 +62,14 @@ class CustomTextField extends StatelessWidget {
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Theme.of(context).primaryColor),
               ),
-              labelText: this.hint,
+              labelText: hint,
               hintStyle: TextStyle(
                 fontSize: isMobileLayout ? width * 0.04 : width * 0.025,
               ),
-              prefixIcon: this.prefixIcon,
-              suffixIcon: this.suffixIcon,
+              prefixIcon: prefixIcon,
+              suffixIcon: suffixIcon,
             ),
-            onChanged: (text) => this.onChanged(text),
+            onChanged: (text) => onChanged(text),
           ),
         ),
       ],
