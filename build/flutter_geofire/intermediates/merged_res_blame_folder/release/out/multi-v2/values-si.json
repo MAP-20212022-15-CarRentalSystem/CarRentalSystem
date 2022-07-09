@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\flutter_geofire\\intermediates\\res\\merged\\release\\values-si\\values-si.xml",
+            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\flutter_geofire\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-si\\values-si.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\8254e5c9d489045bcc39aedd100d7919\\jetified-play-services-basement-16.1.0\\res\\values-si\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "197",
-                        "endOffsets": "444"
-                    },
-                    "to": {
-                        "startLines": "10",
-                        "startColumns": "4",
-                        "startOffsets": "1242",
-                        "endColumns": "197",
-                        "endOffsets": "1435"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\049c24c69b44241fa1a32a0b5d3058a6\\core-1.6.0\\res\\values-si\\values-si.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\values-si\\values-si.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -38,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\2f2a017e980851b9c70f86d9946ca7bb\\jetified-play-services-base-16.0.1\\res\\values-si\\values.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\e2d7a2135e2b9e25ae67eb595ae73b6d\\transformed\\jetified-play-services-basement-16.1.0\\res\\values-si\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "197",
+                        "endOffsets": "444"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "1242",
+                        "endColumns": "197",
+                        "endOffsets": "1435"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\37bf2d2ec5e7c4aa6e74c0aacec3702a\\transformed\\jetified-play-services-base-16.0.1\\res\\values-si\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -57,27 +57,10 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\flutter_geofire\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-si\\values-si.xml",
+            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\flutter_geofire\\intermediates\\merged_res\\release\\values-si\\values-si.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\8254e5c9d489045bcc39aedd100d7919\\jetified-play-services-basement-16.1.0\\res\\values-si\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "197",
-                        "endOffsets": "444"
-                    },
-                    "to": {
-                        "startLines": "10",
-                        "startColumns": "4",
-                        "startOffsets": "1242",
-                        "endColumns": "197",
-                        "endOffsets": "1435"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\049c24c69b44241fa1a32a0b5d3058a6\\core-1.6.0\\res\\values-si\\values-si.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\values-si\\values-si.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -94,7 +77,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\2f2a017e980851b9c70f86d9946ca7bb\\jetified-play-services-base-16.0.1\\res\\values-si\\values.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\e2d7a2135e2b9e25ae67eb595ae73b6d\\transformed\\jetified-play-services-basement-16.1.0\\res\\values-si\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "197",
+                        "endOffsets": "444"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "1242",
+                        "endColumns": "197",
+                        "endOffsets": "1435"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\37bf2d2ec5e7c4aa6e74c0aacec3702a\\transformed\\jetified-play-services-base-16.0.1\\res\\values-si\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

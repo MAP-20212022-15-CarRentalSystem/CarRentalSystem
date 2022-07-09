@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\geolocator_android\\intermediates\\res\\merged\\release\\values-ar\\values-ar.xml",
+            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\geolocator_android\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ar\\values-ar.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\3cfb51dc8c4844597df41789cee7f3f8\\jetified-play-services-basement-17.0.0\\res\\values-ar\\values.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\4ef803ba34d31dcf48df123a27eb5d76\\transformed\\jetified-play-services-basement-17.0.0\\res\\values-ar\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\049c24c69b44241fa1a32a0b5d3058a6\\core-1.6.0\\res\\values-ar\\values-ar.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\values-ar\\values-ar.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\af730cfb276820c09e1a0f92d36c2a8b\\jetified-play-services-base-17.0.0\\res\\values-ar\\values.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\1ea967b797818d9badf6aaa0240ca184\\transformed\\jetified-play-services-base-17.0.0\\res\\values-ar\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -57,10 +57,10 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\geolocator_android\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ar\\values-ar.xml",
+            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\geolocator_android\\intermediates\\merged_res\\release\\values-ar\\values-ar.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\3cfb51dc8c4844597df41789cee7f3f8\\jetified-play-services-basement-17.0.0\\res\\values-ar\\values.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\4ef803ba34d31dcf48df123a27eb5d76\\transformed\\jetified-play-services-basement-17.0.0\\res\\values-ar\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -77,7 +77,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\049c24c69b44241fa1a32a0b5d3058a6\\core-1.6.0\\res\\values-ar\\values-ar.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\values-ar\\values-ar.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -94,7 +94,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\af730cfb276820c09e1a0f92d36c2a8b\\jetified-play-services-base-17.0.0\\res\\values-ar\\values.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\1ea967b797818d9badf6aaa0240ca184\\transformed\\jetified-play-services-base-17.0.0\\res\\values-ar\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

@@ -137,7 +137,7 @@ class RunningTrip extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          'BDT ${details.cost}',
+                          'RM ${details.cost}',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,

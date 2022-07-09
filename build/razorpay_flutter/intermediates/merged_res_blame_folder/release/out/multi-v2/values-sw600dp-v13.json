@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\razorpay_flutter\\intermediates\\res\\merged\\release\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\razorpay_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\febd00e4b59c9357ed1111c436af3e2b\\jetified-checkout-1.6.19\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\e050dfd600fca64180fc0eb08fc89548\\transformed\\jetified-checkout-1.6.19\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -17,10 +17,10 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\razorpay_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\razorpay_flutter\\intermediates\\merged_res\\release\\values-sw600dp-v13\\values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\febd00e4b59c9357ed1111c436af3e2b\\jetified-checkout-1.6.19\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\e050dfd600fca64180fc0eb08fc89548\\transformed\\jetified-checkout-1.6.19\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

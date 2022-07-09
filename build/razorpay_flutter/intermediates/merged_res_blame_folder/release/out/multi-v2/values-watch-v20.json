@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\razorpay_flutter\\intermediates\\res\\merged\\release\\values-watch-v20\\values-watch-v20.xml",
+            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\razorpay_flutter\\intermediates\\merged_res\\release\\values-watch-v20\\values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\bcea383eadf44af480248323ceae4ee5\\jetified-play-services-auth-17.0.0\\res\\values-watch-v20\\values.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\cd485411926a6fe063c6645ccd1141b6\\transformed\\jetified-play-services-auth-17.0.0\\res\\values-watch-v20\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
@@ -23,10 +23,10 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\razorpay_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
+            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\razorpay_flutter\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\bcea383eadf44af480248323ceae4ee5\\jetified-play-services-auth-17.0.0\\res\\values-watch-v20\\values.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\cd485411926a6fe063c6645ccd1141b6\\transformed\\jetified-play-services-auth-17.0.0\\res\\values-watch-v20\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",

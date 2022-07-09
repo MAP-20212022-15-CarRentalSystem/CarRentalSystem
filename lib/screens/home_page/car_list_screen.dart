@@ -88,7 +88,7 @@ class CarList extends ConsumerWidget {
                             Column(
                               children: [
                                 Text(
-                                  'BDT ${e.amount}',
+                                  'RM ${e.amount}',
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,
@@ -106,7 +106,7 @@ class CarList extends ConsumerWidget {
                             Column(
                               children: [
                                 Text(
-                                  'BDT $cost',
+                                  'RM $cost',
                                   style: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,

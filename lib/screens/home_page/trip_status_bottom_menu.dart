@@ -42,7 +42,6 @@ class TripStatusWidget extends ConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                
                 Text(
                   'From : ${ref.watch(pickupAddressProvider)}',
                   textAlign: TextAlign.center,
@@ -94,7 +93,7 @@ class TripStatusWidget extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          'BDT ${AppGLF.calculateFares(details)}',
+                          'RM ${AppGLF.calculateFares(details)}',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,

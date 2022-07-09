@@ -104,7 +104,7 @@ class TripDetailsWidget extends ConsumerWidget {
                           ),
                         ),
                         Text(
-                          'BDT ${AppGLF.calculateFares(details)}',
+                          'RM ${AppGLF.calculateFares(details)}',
                           style: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,

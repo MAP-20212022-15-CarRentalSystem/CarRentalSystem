@@ -1,18 +1,18 @@
 [
     {
-        "merged": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\sqflite\\intermediates\\res\\merged\\release\\drawable\\notification_bg.xml",
-        "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\049c24c69b44241fa1a32a0b5d3058a6\\core-1.6.0\\res\\drawable\\notification_bg.xml"
+        "merged": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\sqflite\\intermediates\\merged_res\\release\\drawable\\notification_icon_background.xml",
+        "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\drawable\\notification_icon_background.xml"
     },
     {
-        "merged": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\sqflite\\intermediates\\res\\merged\\release\\drawable\\notification_tile_bg.xml",
-        "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\049c24c69b44241fa1a32a0b5d3058a6\\core-1.6.0\\res\\drawable\\notification_tile_bg.xml"
+        "merged": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\sqflite\\intermediates\\merged_res\\release\\drawable\\notification_bg.xml",
+        "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\drawable\\notification_bg.xml"
     },
     {
-        "merged": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\sqflite\\intermediates\\res\\merged\\release\\drawable\\notification_bg_low.xml",
-        "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\049c24c69b44241fa1a32a0b5d3058a6\\core-1.6.0\\res\\drawable\\notification_bg_low.xml"
+        "merged": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\sqflite\\intermediates\\merged_res\\release\\drawable\\notification_bg_low.xml",
+        "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\drawable\\notification_bg_low.xml"
     },
     {
-        "merged": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\sqflite\\intermediates\\res\\merged\\release\\drawable\\notification_icon_background.xml",
-        "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\049c24c69b44241fa1a32a0b5d3058a6\\core-1.6.0\\res\\drawable\\notification_icon_background.xml"
+        "merged": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\sqflite\\intermediates\\merged_res\\release\\drawable\\notification_tile_bg.xml",
+        "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\drawable\\notification_tile_bg.xml"
     }
 ]

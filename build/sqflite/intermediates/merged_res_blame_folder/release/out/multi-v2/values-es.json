@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\sqflite\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-es\\values-es.xml",
+            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\sqflite\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-es\\values-es.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\049c24c69b44241fa1a32a0b5d3058a6\\core-1.6.0\\res\\values-es\\values-es.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\values-es\\values-es.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -16,10 +16,10 @@
             ]
         },
         {
-            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\CarRentalSystem\\build\\sqflite\\intermediates\\res\\merged\\release\\values-es\\values-es.xml",
+            "outputFile": "C:\\Users\\Yaqub\\OneDrive\\Desktop\\New folder\\build\\sqflite\\intermediates\\merged_res\\release\\values-es\\values-es.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-2\\files-2.1\\049c24c69b44241fa1a32a0b5d3058a6\\core-1.6.0\\res\\values-es\\values-es.xml",
+                    "source": "C:\\Users\\Yaqub\\.gradle\\caches\\transforms-3\\acbce933e4b464a5224ed377a62db1f5\\transformed\\core-1.6.0\\res\\values-es\\values-es.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

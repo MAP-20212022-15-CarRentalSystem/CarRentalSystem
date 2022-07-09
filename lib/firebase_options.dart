@@ -4,6 +4,16 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
+/// Default [FirebaseOptions] for use with your Firebase apps.
+///
+/// Example:
+/// ```dart
+/// import 'firebase_options.dart';
+/// // ...
+/// await Firebase.initializeApp(
+///   options: DefaultFirebaseOptions.currentPlatform,
+/// );
+/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -15,9 +25,21 @@ class DefaultFirebaseOptions {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
+      case TargetPlatform.iOS:
+        return ios;
+      case TargetPlatform.macOS:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       default:
@@ -32,8 +54,18 @@ class DefaultFirebaseOptions {
     appId: '1:1016734844278:android:6d6b3569d67502a0536657',
     messagingSenderId: '1016734844278',
     projectId: 'carrentalsystem-ef6ae',
-    databaseURL:
-        'https://carrentalsystem-ef6ae-default-rtdb.asia-southeast1.firebasedatabase.app',
+    databaseURL: 'https://carrentalsystem-ef6ae-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'carrentalsystem-ef6ae.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDsvxMOT0-PSClgB4Mk7t6uA7Ij-PhL4UU',
+    appId: '1:1016734844278:ios:eff1f253b6db7aa9536657',
+    messagingSenderId: '1016734844278',
+    projectId: 'carrentalsystem-ef6ae',
+    databaseURL: 'https://carrentalsystem-ef6ae-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'carrentalsystem-ef6ae.appspot.com',
+    iosClientId: '1016734844278-obgq6ece1b0e8ch1nf62pgi255lpueba.apps.googleusercontent.com',
+    iosBundleId: 'com.example.hopon',
   );
 }
