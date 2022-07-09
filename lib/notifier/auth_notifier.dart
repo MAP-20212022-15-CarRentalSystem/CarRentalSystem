@@ -18,6 +18,24 @@ class SignOutNotifier extends StateNotifier<ApiState<String>> {
   }
 }
 
+class SignInNotifier extends StateNotifier<ApiState<UserCredential>> {
+  SignInNotifier() : super(const ApiState.initial());
+  Future<void> signIn(String email, String password) async {
+    state = const ApiState.loading();
+    try {
+      final UserCredential data =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      EasyLoading.showSuccess('Logged In');
+      state = ApiState.loaded(data: data);
+    } catch (e) {
+      state = ApiState.error(error: NetworkExceptions.getErrorMsg(e));
+    }
+  }
+}
+
 class SignUpNotifier extends StateNotifier<ApiState<UserCredential>> {
   SignUpNotifier() : super(const ApiState.initial());
   Future<void> signUp(String email, String password) async {
