@@ -1,136 +1,34 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:car_rental_system/constants/duration_contants.dart';
+import 'package:car_rental_system/constants/regular_string_constants.dart';
+import 'package:car_rental_system/providers/auth_provider.dart';
+import 'package:car_rental_system/utils/context_less.dart';
+import 'package:car_rental_system/utils/routes.dart';
+import 'package:car_rental_system/widgets/state_widgets.dart';
+import 'package:car_rental_system/widgets/widgets.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 
-import 'package:vehicle_sharing_app/screens/forgot_password_page.dart';
-import 'package:vehicle_sharing_app/screens/home_page.dart';
-import 'package:vehicle_sharing_app/screens/signup_page.dart';
-import 'package:vehicle_sharing_app/services/authentication_service.dart';
-import 'package:vehicle_sharing_app/widgets/widgets.dart';
-
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  void showSnackBar(String title) {
-    final snackbar = SnackBar(
-      content: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 15),
-      ),
-    );
-    scaffoldKey.currentState.showSnackBar(snackbar);
-  }
-
-  var emailIdController = TextEditingController();
-  var passwordController = TextEditingController();
-
-  Widget _buildLogin() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30),
-      child: Column(
-        children: [
-          InputTextField(
-            controller: emailIdController,
-            label: 'Email-Id',
-            icon: Icon(Icons.email_outlined),
-          ),
-          InputTextField(
-            controller: passwordController,
-            label: 'Password',
-            icon: Icon(Icons.lock),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          GestureDetector(
-            onTap: () async {
-              // network connectivity
-              var connectivityResult = await Connectivity().checkConnectivity();
-              if (connectivityResult != ConnectivityResult.mobile &&
-                  connectivityResult != ConnectivityResult.wifi) {
-                showSnackBar('No Internet connectivity');
-                return;
-              }
-
-              if (!emailIdController.text.contains('@')) {
-                showSnackBar('Please provide a valid email address');
-              }
-
-              if (passwordController.text.length < 6) {
-                showSnackBar('Please provide a password of length more than 6');
-              }
-              BuildContext dialogContext;
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext context) {
-                  dialogContext = context;
-                  return ProgressDialog(
-                    status: 'Logging you in...',
-                  );
-                },
-              );
-              context
-                  .read<AuthenticationService>()
-                  .signIn(
-                    email: emailIdController.text.trim(),
-                    password: passwordController.text.trim(),
-                  )
-                  .then((value) => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return HomePage();
-                        }),
-                      ));
-              Navigator.pop(dialogContext);
-            },
-            child: CustomButton(
-              text: 'Login',
-            ),
-          ),
-          Text("\nDon't have any account?"),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return SignUpPage();
-                }),
-              );
-            },
-            child: Text(
-              'SignUp here',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-        ],
-      ),
-    );
-  }
+class LoginPage extends ConsumerWidget {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       key: scaffoldKey,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.only(top: 130),
+          padding: const EdgeInsets.only(top: 130),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
+                const Text(
                   'Rental Car',
                   style: TextStyle(
                     fontSize: 60,
@@ -140,127 +38,124 @@ class _LoginPageState extends State<LoginPage> {
                     // color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 80),
+                const SizedBox(height: 80),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
-                  child: Column(
-                    children: [
-                      InputTextField(
-                        controller: emailIdController,
-                        label: 'Email-Id',
-                        obscure: false,
-                        icon: Icon(Icons.email_outlined),
-                      ),
-                      InputTextField(
-                        controller: passwordController,
-                        label: 'Password',
-                        obscure: true,
-                        icon: Icon(Icons.lock),
-                      ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          // network connectivity
-                          var connectivityResult =
-                              await Connectivity().checkConnectivity();
-                          if (connectivityResult != ConnectivityResult.mobile &&
-                              connectivityResult != ConnectivityResult.wifi) {
-                            showSnackBar('No Internet connectivity');
-                            return;
-                          }
-
-                          if (!emailIdController.text.contains('@')) {
-                            showSnackBar(
-                                'Please provide a valid email address');
-                          }
-
-                          if (passwordController.text.length < 6) {
-                            showSnackBar(
-                                'Please provide a password of length more than 6');
-                          }
-                          BuildContext dialogContext;
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
-                              dialogContext = context;
-                              return ProgressDialog(
-                                status: 'Logging you in...',
-                              );
-                            },
-                          );
-                          context
-                              .read<AuthenticationService>()
-                              .signIn(
-                                email: emailIdController.text.trim(),
-                                password: passwordController.text.trim(),
-                              )
-                              .then((value) => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) {
-                                      return HomePage();
-                                    }),
-                                  ));
-                          // Navigator.pop(dialogContext);
-                        },
-                        child: CustomButton(
-                          text: 'Login',
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: FormBuilder(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        InputFormField(
+                          fieldName: 'Email-Id',
+                          validator: FormBuilderValidators.compose(
+                            [FormBuilderValidators.required()],
+                          ),
+                          name: AppRSC.acEmail,
                         ),
-                      ),
-                      SizedBox(height: 7),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              return ForgetPassword();
-                            }),
-                          );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Forgot Password',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 12),
-                            ),
-                          ],
+                        InputFormField(
+                          validator: FormBuilderValidators.compose(
+                            [FormBuilderValidators.required()],
+                          ),
+                          name: AppRSC.acPassword,
+                          fieldName: 'Password',
                         ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              return SignUpPage();
-                            }),
-                          );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Don't have any account?\t",
-                              style: TextStyle(fontSize: 10),
-                            ),
-                            Text(
-                              'SignUp here',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 12),
-                            ),
-                          ],
+                        const SizedBox(
+                          height: 30,
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
+                        ref.watch(signInProvider).map(
+                              initial: (_) => GestureDetector(
+                                onTap: () async {
+                                  // network connectivity
+                                  final connectivityResult =
+                                      await Connectivity().checkConnectivity();
+                                  if (connectivityResult !=
+                                          ConnectivityResult.mobile &&
+                                      connectivityResult !=
+                                          ConnectivityResult.wifi) {
+                                    EasyLoading.showError('No Internet');
+                                    return;
+                                  }
+                                  if (_formKey.currentState != null &&
+                                      _formKey.currentState!
+                                          .saveAndValidate()) {
+                                    final fields =
+                                        _formKey.currentState!.fields;
+                                    ref.watch(signInProvider.notifier).signIn(
+                                          fields[AppRSC.acEmail]!.value
+                                              as String,
+                                          fields[AppRSC.acPassword]!.value
+                                              as String,
+                                        );
+                                  }
+                                },
+                                child: const CustomButton(
+                                  text: 'Login',
+                                ),
+                              ),
+                              loading: (_) => const LoadingWidget(),
+                              loaded: (_) {
+                                Future.delayed(AppDurConst.transissionDuration,
+                                    () {
+                                  context.nav.pushNamedAndRemoveUntil(
+                                    Routes.home,
+                                    (route) => false,
+                                  );
+                                });
+                                return const MessageWidget(
+                                  msg: 'Success',
+                                );
+                              },
+                              error: (_) => ErrorHandleWidget(
+                                error: _.error,
+                              ),
+                            ),
+                        const SizedBox(height: 7),
+                        GestureDetector(
+                          onTap: () {
+                            context.nav.pushNamed(Routes.forgetPass);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              Text(
+                                'Forgot Password',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            context.nav.pushNamed(Routes.signUp);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text(
+                                "Don't have any account?\t",
+                                style: TextStyle(fontSize: 10),
+                              ),
+                              Text(
+                                'SignUp here',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
