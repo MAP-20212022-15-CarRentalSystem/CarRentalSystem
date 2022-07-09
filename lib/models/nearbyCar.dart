@@ -1,11 +1,11 @@
-class NearbyCar{
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+class NearbyCar {
   String key;
   double longitude;
   double latitude;
-
   NearbyCar({
-    this.key,
-    this.longitude,
-    this.latitude,
+    required this.key,
+    required this.longitude,
+    required this.latitude,
   });
 }
