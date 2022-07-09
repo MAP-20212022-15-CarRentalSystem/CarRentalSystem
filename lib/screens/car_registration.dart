@@ -1,220 +1,202 @@
 import 'dart:io';
+
+import 'package:car_rental_system/constants/duration_contants.dart';
+import 'package:car_rental_system/constants/regular_string_constants.dart';
+import 'package:car_rental_system/providers/misc_provider.dart';
+import 'package:car_rental_system/providers/vehicle_provider.dart';
+import 'package:car_rental_system/utils/context_less.dart';
+import 'package:car_rental_system/widgets/state_widgets.dart';
+import 'package:car_rental_system/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:vehicle_sharing_app/models/user.dart';
-import 'package:vehicle_sharing_app/screens/owner_homePage.dart';
-import 'package:vehicle_sharing_app/services/firebase_services.dart';
-import 'package:vehicle_sharing_app/services/validation_services.dart';
-import 'package:vehicle_sharing_app/widgets/widgets.dart';
 
-class VehicleDetails extends StatefulWidget {
-  @override
-  _VehicleDetailsState createState() => _VehicleDetailsState();
-}
-
-class _VehicleDetailsState extends State<VehicleDetails> {
-  final _formKey = GlobalKey<FormState>();
-
-  TextEditingController _modelNameController = TextEditingController();
-  TextEditingController _vehicleNumberController = TextEditingController();
-  TextEditingController _ownerNameController = TextEditingController();
-  TextEditingController _colorController = TextEditingController();
-  TextEditingController _aadharcardController = TextEditingController();
-  TextEditingController _rentAmount = TextEditingController();
-
-  VehicleUser owner = VehicleUser();
-  File imageFile;
-
-  Future<void> _pickImage(ImageSource source) async {
-    final selected = await ImagePicker().getImage(source: source);
-    setState(() {
-      imageFile = File(selected.path);
-    });
-  }
-
-  void _clear() {
-    setState(() {
-      imageFile = null;
-    });
-  }
-
-  // _save() async {
-  //     FirebaseFunctions().uploadFoodAndImages(owner, imageFile, context);
-  // }
-
-  FirebaseFunctions firebaseFunctions = FirebaseFunctions();
-
-  void initVehicleUser() {
-    owner.modelName = _modelNameController.text;
-    owner.vehicleNumber = _vehicleNumberController.text;
-    owner.ownerName = _ownerNameController.text;
-    owner.color = _colorController.text;
-    owner.aadharNumber = _aadharcardController.text;
-    owner.hasCompletedRegistration = true;
-    owner.amount = _rentAmount.text;
-  }
+class VehicleRegistration extends ConsumerWidget {
+  final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
 
   @override
-  Widget build(BuildContext context) {
-    Size deviceSize = MediaQuery.of(context).size;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final Size deviceSize = MediaQuery.of(context).size;
+    final imageFile = ref.watch(imageFileProvider);
 
     return Scaffold(
       body: Builder(
         builder: (context) {
-          return Form(
+          return FormBuilder(
             key: _formKey,
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
+                padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    CustomBackButton(pageHeader: 'Register your car'),
-                    SizedBox(
+                    const CustomBackButton(pageHeader: 'Register your car'),
+                    const SizedBox(
                       height: 20,
                     ),
-                    imageFile != null
-                        ? Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width - 20,
-                                  child: Image.file(
-                                    imageFile,
-                                    fit: BoxFit.fitWidth,
-                                  ),
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  FlatButton(
-                                    child: Icon(Icons.refresh),
-                                    onPressed: _clear,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )
-                        : GestureDetector(
-                            onTap: () {
-                              _pickImage(ImageSource.gallery);
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              width: 200,
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.directions_car,
-                                    size: 80,
-                                  ),
-                                  Text(
-                                    'Choose your car image',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.black54,
-                                    ),
-                                  ),
-                                ],
+                    if (imageFile != null)
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width - 20,
+                              child: Image.file(
+                                imageFile,
+                                fit: BoxFit.fitWidth,
                               ),
                             ),
                           ),
-                    SizedBox(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ElevatedButton(
+                                child: const Icon(Icons.refresh),
+                                onPressed: () {
+                                  ref.watch(imageFileProvider.notifier).state =
+                                      null;
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    else
+                      GestureDetector(
+                        onTap: () async {
+                          final file = await ImagePicker()
+                              .pickImage(source: ImageSource.gallery);
+                          if (file != null) {
+                            ref.watch(imageFileProvider.notifier).state =
+                                File(file.path);
+                          }
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: 200,
+                          child: Column(
+                            children: const [
+                              Icon(
+                                Icons.directions_car,
+                                size: 80,
+                              ),
+                              Text(
+                                'Choose your car image',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    const SizedBox(
                       height: 0.0,
                     ),
                     InputFormField(
                       fieldName: 'Model Name',
-                      obscure: false,
-                      validator: ValidationService().modelNameValidator,
-                      controller: _modelNameController,
+                      validator: FormBuilderValidators.compose(
+                        [FormBuilderValidators.required()],
+                      ),
+                      name: AppRSC.vrfcModelName,
                     ),
                     SizedBox(
                       height: 0.03 * deviceSize.height,
                     ),
                     InputFormField(
                       fieldName: 'Vehicle Number',
-                      obscure: false,
-                      validator: ValidationService().vehicleNumberValidator,
-                      controller: _vehicleNumberController,
+                      validator: FormBuilderValidators.compose(
+                        [FormBuilderValidators.required()],
+                      ),
+                      name: AppRSC.vrfcVehicleNumber,
                     ),
                     SizedBox(
                       height: 0.03 * deviceSize.height,
                     ),
                     InputFormField(
                       fieldName: 'Owner Name',
-                      obscure: false,
-                      validator: ValidationService().ownerNameValidator,
-                      controller: _ownerNameController,
+                      validator: FormBuilderValidators.compose(
+                        [FormBuilderValidators.required()],
+                      ),
+                      name: AppRSC.vrfcOwnerName,
                     ),
                     SizedBox(
                       height: 0.03 * deviceSize.height,
                     ),
                     InputFormField(
                       fieldName: 'Color',
-                      obscure: false,
-                      validator: ValidationService().colorValidator,
-                      controller: _colorController,
+                      validator: FormBuilderValidators.compose(
+                        [FormBuilderValidators.required()],
+                      ),
+                      name: AppRSC.vrfcColor,
                     ),
                     SizedBox(
                       height: 0.03 * deviceSize.height,
                     ),
                     InputFormField(
                       fieldName: 'IC/Passport Number',
-                      obscure: false,
-                      validator: ValidationService().aadharNumberValidator,
-                      controller: _aadharcardController,
+                      validator: FormBuilderValidators.compose(
+                        [FormBuilderValidators.required()],
+                      ),
+                      name: AppRSC.vrfcNidNumber,
                     ),
                     SizedBox(
                       height: 0.03 * deviceSize.height,
                     ),
                     InputFormField(
                       fieldName: 'Rent amount',
-                      obscure: false,
-                      validator: ValidationService().aadharNumberValidator,
-                      controller: _rentAmount,
+                      validator: FormBuilderValidators.compose(
+                        [
+                          FormBuilderValidators.required(),
+                          FormBuilderValidators.numeric()
+                        ],
+                      ),
+                      name: AppRSC.vrfcAmount,
                     ),
                     SizedBox(
                       height: 0.05 * deviceSize.height,
                     ),
-                    GestureDetector(
-                      onTap: () async {
-                        initVehicleUser();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Processing')));
-                        String isComplete =
-                            await firebaseFunctions.uploadVehicleInfo(
-                                owner.toMap(), imageFile, context);
-                        if (isComplete == 'true') {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return DisplayMap();
-                              },
+                    ref.watch(vehicleUploadProvider).map(
+                          initial: (_) => GestureDetector(
+                            onTap: () async {
+                              if (_formKey.currentState!.saveAndValidate()) {
+                                final data = _formKey.currentState!.value;
+                                if (imageFile != null) {
+                                  EasyLoading.showInfo('Registering Your Car');
+                                  ref
+                                      .watch(vehicleUploadProvider.notifier)
+                                      .upload(data, imageFile);
+                                } else {
+                                  EasyLoading.showError('No Image Selected');
+                                }
+                              }
+                            },
+                            child: const CustomButton(
+                              text: 'Register',
                             ),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(isComplete)));
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return VehicleDetails();
+                          ),
+                          loading: (_) => const LoadingWidget(),
+                          loaded: (_) {
+                            Future.delayed(AppDurConst.rebuid).then(
+                              (value) {
+                                context.nav.pop();
                               },
-                            ),
-                          );
-                        }
-                      },
-                      child: CustomButton(
-                        text: 'Register',
-                      ),
-                    ),
-                    SizedBox(
+                            );
+                            return const MessageWidget(
+                              msg: 'Success',
+                            );
+                          },
+                          error: (_) => ErrorHandleWidget(
+                            error: _.error,
+                          ),
+                        ),
+                    const SizedBox(
                       height: 20,
                     ),
                   ],
