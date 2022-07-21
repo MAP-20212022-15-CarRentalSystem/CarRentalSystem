@@ -2,23 +2,23 @@
 import 'dart:convert';
 
 class AppUser {
-  String name;
+  String? name;
   String? bloodGroup;
-  String licenseNumber;
-  String contact;
-  String age;
-  String emailID;
-  bool hasCompleteProfile = false;
-  String uuid;
+  String? licenseNumber;
+  String? contact;
+  String? age;
+  String? emailID;
+  bool? hasCompleteProfile = false;
+  String? uuid;
   AppUser({
-    required this.name,
+    this.name,
     this.bloodGroup,
-    required this.licenseNumber,
-    required this.contact,
-    required this.age,
-    required this.emailID,
-    required this.hasCompleteProfile,
-    required this.uuid,
+    this.licenseNumber,
+    this.contact,
+    this.age,
+    this.emailID,
+    this.hasCompleteProfile,
+    this.uuid,
   });
 
   AppUser copyWith({
@@ -58,15 +58,18 @@ class AppUser {
 
   factory AppUser.fromMap(Map<String, dynamic> map) {
     return AppUser(
-      name: map['name'] as String,
+      name: map['name'] != null ? map['name'] as String : null,
       bloodGroup:
           map['bloodGroup'] != null ? map['bloodGroup'] as String : null,
-      licenseNumber: map['licenseNumber'] as String,
-      contact: map['contact'] as String,
-      age: map['age'] as String,
-      emailID: map['emailID'] as String,
-      hasCompleteProfile: map['hasCompleteProfile'] as bool,
-      uuid: map['uuid'] as String,
+      licenseNumber:
+          map['licenseNumber'] != null ? map['licenseNumber'] as String : null,
+      contact: map['contact'] != null ? map['contact'] as String : null,
+      age: map['age'] != null ? map['age'] as String : null,
+      emailID: map['emailID'] != null ? map['emailID'] as String : null,
+      hasCompleteProfile: map['hasCompleteProfile'] != null
+          ? map['hasCompleteProfile'] as bool
+          : null,
+      uuid: map['uuid'] != null ? map['uuid'] as String : null,
     );
   }
 
@@ -131,7 +134,6 @@ class VehicleUser {
     required this.ownerEmail,
     required this.userId,
   });
- 
 
   VehicleUser copyWith({
     String? modelName,
@@ -152,7 +154,8 @@ class VehicleUser {
       color: color ?? this.color,
       vehicleImg: vehicleImg ?? this.vehicleImg,
       nidNumber: nidNumber ?? this.nidNumber,
-      hasCompletedRegistration: hasCompletedRegistration ?? this.hasCompletedRegistration,
+      hasCompletedRegistration:
+          hasCompletedRegistration ?? this.hasCompletedRegistration,
       amount: amount ?? this.amount,
       ownerEmail: ownerEmail ?? this.ownerEmail,
       userId: userId ?? this.userId,
@@ -191,7 +194,8 @@ class VehicleUser {
 
   String toJson() => json.encode(toMap());
 
-  factory VehicleUser.fromJson(String source) => VehicleUser.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory VehicleUser.fromJson(String source) =>
+      VehicleUser.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -201,31 +205,31 @@ class VehicleUser {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is VehicleUser &&
-      other.modelName == modelName &&
-      other.vehicleNumber == vehicleNumber &&
-      other.ownerName == ownerName &&
-      other.color == color &&
-      other.vehicleImg == vehicleImg &&
-      other.nidNumber == nidNumber &&
-      other.hasCompletedRegistration == hasCompletedRegistration &&
-      other.amount == amount &&
-      other.ownerEmail == ownerEmail &&
-      other.userId == userId;
+        other.modelName == modelName &&
+        other.vehicleNumber == vehicleNumber &&
+        other.ownerName == ownerName &&
+        other.color == color &&
+        other.vehicleImg == vehicleImg &&
+        other.nidNumber == nidNumber &&
+        other.hasCompletedRegistration == hasCompletedRegistration &&
+        other.amount == amount &&
+        other.ownerEmail == ownerEmail &&
+        other.userId == userId;
   }
 
   @override
   int get hashCode {
     return modelName.hashCode ^
-      vehicleNumber.hashCode ^
-      ownerName.hashCode ^
-      color.hashCode ^
-      vehicleImg.hashCode ^
-      nidNumber.hashCode ^
-      hasCompletedRegistration.hashCode ^
-      amount.hashCode ^
-      ownerEmail.hashCode ^
-      userId.hashCode;
+        vehicleNumber.hashCode ^
+        ownerName.hashCode ^
+        color.hashCode ^
+        vehicleImg.hashCode ^
+        nidNumber.hashCode ^
+        hasCompletedRegistration.hashCode ^
+        amount.hashCode ^
+        ownerEmail.hashCode ^
+        userId.hashCode;
   }
 }

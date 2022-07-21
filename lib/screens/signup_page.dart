@@ -1,3 +1,4 @@
+import 'package:car_rental_system/constants/duration_contants.dart';
 import 'package:car_rental_system/constants/regular_string_constants.dart';
 import 'package:car_rental_system/providers/auth_provider.dart';
 import 'package:car_rental_system/utils/context_less.dart';
@@ -91,12 +92,25 @@ class SignUpPage extends ConsumerWidget {
                         ),
                       ),
                       loading: (_) => const LoadingWidget(),
-                      loaded: (_) => const MessageWidget(
-                        msg: 'Success',
-                      ),
-                      error: (_) => ErrorHandleWidget(
-                        error: _.error,
-                      ),
+                      loaded: (_) {
+                        Future.delayed(AppDurConst.transissionDuration, () {
+                          context.nav.pushNamedAndRemoveUntil(
+                            Routes.home,
+                            (route) => false,
+                          );
+                        });
+                        return const MessageWidget(
+                          msg: 'Success',
+                        );
+                      },
+                      error: (_) {
+                        Future.delayed(const Duration(seconds: 3)).then((val) {
+                          ref.refresh(signUpProvider);
+                        });
+                        return ErrorHandleWidget(
+                          error: _.error,
+                        );
+                      },
                     ),
                 const SizedBox(
                   height: 20,

@@ -42,6 +42,7 @@ class TripStatusWidget extends ConsumerWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                
                 Text(
                   'From : ${ref.watch(pickupAddressProvider)}',
                   textAlign: TextAlign.center,

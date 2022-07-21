@@ -3,6 +3,7 @@ import 'package:car_rental_system/models/car_data_model.dart';
 import 'package:car_rental_system/models/user.dart';
 import 'package:car_rental_system/notifier/vehicle_notifier.dart';
 import 'package:car_rental_system/services/api_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Uploads Vehicle For the First Time
@@ -24,9 +25,19 @@ final vehicleUserProvider = StateNotifierProvider.autoDispose
 });
 
 //updates Vehicle details
-final userHasVehicleProvider =
-    StateNotifierProvider<UserhasVehicleNotifier, ApiState<bool>>((ref) {
-  return UserhasVehicleNotifier();
+final userHasVehicleProvider = StateProvider<CarDetailsModel?>((ref) {
+  CarDetailsModel? car;
+  ref.watch(carListProvider).maybeWhen(
+        orElse: () {},
+        loaded: (_) {
+          for (var element in _) {
+            if (element.userId == FirebaseAuth.instance.currentUser?.uid) {
+              car = element;
+            }
+          }
+        },
+      );
+  return car;
 });
 //updates Vehicle Status
 final udateVehicleStatusProvider =
@@ -34,20 +45,16 @@ final udateVehicleStatusProvider =
   return UpdateVehicleStatusNotifier();
 });
 
-
 final udateVehicleAvailabiltyStatusProvider =
     StateNotifierProvider<UpdateVehicleRideStatusNotifier, ApiState<String>>(
         (ref) {
   return UpdateVehicleRideStatusNotifier();
 });
 
-
-
-
 //All cars
 
 final allcarsProvider = StateProvider<List<CarDetailsModel>>((ref) {
-  return [] ;
+  return [];
 });
 
 //Gets All Cars

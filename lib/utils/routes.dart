@@ -1,6 +1,8 @@
 import 'package:car_rental_system/constants/duration_contants.dart';
 import 'package:car_rental_system/main.dart';
 import 'package:car_rental_system/screens/car_registration.dart';
+import 'package:car_rental_system/screens/edit_car_screen.dart';
+import 'package:car_rental_system/screens/edit_profile_screen.dart';
 import 'package:car_rental_system/screens/forgot_password_page.dart';
 import 'package:car_rental_system/screens/home_page.dart';
 import 'package:car_rental_system/screens/home_page/car_list_screen.dart';
@@ -22,6 +24,7 @@ class Routes {
   static const login = '/loginPage';
   static const signUp = '/signUpPage';
   static const forgetPass = '/forgetPass';
+  static const editProfile = '/editProfile';
 
   //Trip
   static const searchDropOff = '/searchDropOff';
@@ -30,6 +33,7 @@ class Routes {
   static const tripReport = '/Report';
   //Vehicle
   static const registerCar = '/registerCar';
+  static const editCar = '/editCar';
   static const carList = '/carList';
 }
 
@@ -52,6 +56,9 @@ Route generatedRoutes(RouteSettings settings) {
     case Routes.forgetPass:
       child = ForgetPassword();
       break;
+    case Routes.editProfile:
+      child = EditProfile();
+      break;
     //Trip
     case Routes.searchDropOff:
       child = SearchDropOffLocation();
@@ -69,6 +76,9 @@ Route generatedRoutes(RouteSettings settings) {
     //Vehicle
     case Routes.registerCar:
       child = VehicleRegistration();
+      break;
+    case Routes.editCar:
+      child = EditCar();
       break;
     //
     case Routes.carList:

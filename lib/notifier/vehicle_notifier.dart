@@ -80,25 +80,7 @@ class VehicleUserNotifier extends StateNotifier<ApiState<VehicleUser>> {
   }
 }
 
-class UserhasVehicleNotifier extends StateNotifier<ApiState<bool>> {
-  UserhasVehicleNotifier() : super(const ApiState.initial()) {
-    getData();
-  }
 
-  Future<void> getData() async {
-    state = const ApiState.loading();
-    try {
-      final DocumentSnapshot<Map<String, dynamic>> data =
-          await AppFBC.userVehicleCollection.get();
-
-      state = ApiState.loaded(
-        data: data.exists,
-      );
-    } catch (e) {
-      state = ApiState.error(error: NetworkExceptions.getErrorMsg(e));
-    }
-  }
-}
 
 class UpdateVehicleStatusNotifier extends StateNotifier<ApiState<String>> {
   UpdateVehicleStatusNotifier() : super(const ApiState.initial());

@@ -33,7 +33,7 @@ class RideHistory extends ConsumerWidget {
                     context.nav.pushNamed(
                       Routes.tripReview,
                       arguments: _trip.docID,
-                    );
+                    ); 
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),

@@ -58,6 +58,7 @@ class LoginPage extends ConsumerWidget {
                           ),
                           name: AppRSC.acPassword,
                           fieldName: 'Password',
+                          obscure: true,
                         ),
                         const SizedBox(
                           height: 30,
@@ -105,9 +106,14 @@ class LoginPage extends ConsumerWidget {
                                   msg: 'Success',
                                 );
                               },
-                              error: (_) => ErrorHandleWidget(
-                                error: _.error,
-                              ),
+                              error: (_) {
+                                Future.delayed(Duration(seconds: 3)).then((val) {
+                                  ref.refresh(signInProvider);
+                                });
+                                return ErrorHandleWidget(
+                                  error: _.error,
+                                );
+                              },
                             ),
                         const SizedBox(height: 7),
                         GestureDetector(

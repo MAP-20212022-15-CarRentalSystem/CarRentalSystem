@@ -1,8 +1,10 @@
 import 'package:car_rental_system/constants/duration_contants.dart';
 import 'package:car_rental_system/constants/firebase_contants.dart';
+import 'package:car_rental_system/models/user.dart';
 import 'package:car_rental_system/providers/auth_provider.dart';
 import 'package:car_rental_system/providers/misc_provider.dart';
 import 'package:car_rental_system/providers/trip_provider.dart';
+import 'package:car_rental_system/providers/user_provider.dart';
 import 'package:car_rental_system/providers/vehicle_provider.dart';
 import 'package:car_rental_system/utils/context_less.dart';
 import 'package:car_rental_system/utils/routes.dart';
@@ -14,18 +16,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CustomAppDrawer extends ConsumerWidget {
   CustomAppDrawer({Key? key}) : super(key: key);
-  bool hasCar = false;
+  AppUser? _user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isOpen = ref.watch(drawerStateProvider);
-    ref.watch(userHasVehicleProvider).maybeWhen(
+    final usercar = ref.watch(userHasVehicleProvider);
+    ref.watch(activeTripProvider);
+    ref.watch(currentUserProvider).maybeWhen(
           orElse: () {},
           loaded: (_) {
-            hasCar = _;
+            _user = _;
           },
         );
-    ref.watch(activeTripProvider);
     ref.watch(carListProvider).maybeWhen(
           orElse: () {},
           loaded: (_) {
@@ -69,26 +72,31 @@ class CustomAppDrawer extends ConsumerWidget {
                           ),
                           //TODO 1: User photo should be here
                           const SizedBox(width: 30),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text('Name'),
-                              SizedBox(height: 8),
-                              Text(
-                                'Visit Profile',
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 12,
+                          GestureDetector(
+                            onTap: () {
+                              context.nav.pushNamed(Routes.editProfile);
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(_user?.name ?? 'Name'),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'Visit Profile',
+                                  style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 12,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
                 ), //Drawer Header
-                if (!hasCar)
+                if (usercar == null)
                   GestureDetector(
                     onTap: () {
                       context.nav.pushNamed(Routes.registerCar);
@@ -102,12 +110,31 @@ class CustomAppDrawer extends ConsumerWidget {
                       ),
                     ),
                   ),
-                if (hasCar)
+                if (usercar != null)
+                  GestureDetector(
+                    onTap: () {
+                      context.nav.pushNamed(Routes.editCar);
+                      ref.watch(drawerStateProvider.notifier).state = false;
+                    },
+                    child: const ListTile(
+                      leading: Icon(Icons.directions_car_rounded),
+                      title: Text(
+                        'Edit Car',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ),
+                  ),
+                if (usercar != null && usercar.isAvailabale == false)
                   GestureDetector(
                     onTap: () {
                       ref
                           .watch(udateVehicleStatusProvider.notifier)
-                          .getData(status: true);
+                          .getData(status: true)
+                          .then((value) {
+                        EasyLoading.showSuccess(
+                          'Successfully Put Your Car on Rent',
+                        );
+                      });
                     },
                     child: const ListTile(
                       leading: Icon(Icons.directions_car_rounded),
@@ -117,7 +144,7 @@ class CustomAppDrawer extends ConsumerWidget {
                       ),
                     ),
                   ),
-                if (hasCar)
+                if (usercar != null)
                   GestureDetector(
                     onTap: () async {
                       EasyLoading.showInfo('Deleting Your car');
@@ -136,12 +163,17 @@ class CustomAppDrawer extends ConsumerWidget {
                       ),
                     ),
                   ),
-                if (hasCar)
+                if (usercar != null && usercar.isAvailabale == true)
                   GestureDetector(
                     onTap: () {
                       ref
                           .watch(udateVehicleStatusProvider.notifier)
-                          .getData(status: false);
+                          .getData(status: false)
+                          .then((value) {
+                        EasyLoading.showSuccess(
+                          'Successfully Removed Your Car on Rent',
+                        );
+                      });
                     },
                     child: const ListTile(
                       leading: Icon(Icons.directions_car_rounded),
@@ -154,6 +186,7 @@ class CustomAppDrawer extends ConsumerWidget {
                 GestureDetector(
                   onTap: () {
                     context.nav.pushNamed(Routes.tripHistory);
+                    ref.watch(drawerStateProvider.notifier).state = false;
                   },
                   child: const ListTile(
                     leading: Icon(Icons.history),
@@ -190,6 +223,9 @@ class CustomAppDrawer extends ConsumerWidget {
                       ),
                       loading: (_) => const LoadingWidget(),
                       loaded: (_) {
+                        Future.delayed(AppDurConst.rebuid).then((value) {
+                          ref.refresh(signOutProvider);
+                        });
                         Future.delayed(AppDurConst.transissionDuration, () {
                           context.nav.pushNamedAndRemoveUntil(
                             Routes.login,

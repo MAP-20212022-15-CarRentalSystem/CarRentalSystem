@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:car_rental_system/constants/firebase_contants.dart';
 import 'package:car_rental_system/models/user.dart';
 import 'package:car_rental_system/services/api_state.dart';
 import 'package:car_rental_system/services/network_exceptions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class UploadUserNotifier extends StateNotifier<ApiState<String>> {
@@ -36,44 +39,33 @@ class UpdateUserNotifier extends StateNotifier<ApiState<String>> {
   }
 }
 
-class UserProfileCompleteNotifier extends StateNotifier<ApiState<bool>> {
-  UserProfileCompleteNotifier() : super(const ApiState.initial());
-  Future<void> hasCompleted() async {
-    state = const ApiState.loading();
-    try {
-      final DocumentSnapshot<Object?> response = await AppFBC.usersCollection
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .get();
-      if (response.exists && response.data() != null) {
-        state = ApiState.loaded(
-          data: AppUser.fromMap(response.data()! as Map<String, dynamic>)
-              .hasCompleteProfile,
-        );
-      }
-
-    } catch (e) {
-      state = ApiState.error(error: NetworkExceptions.getErrorMsg(e));
-    }
-  }
-}
-
 class CurrentUserNotifier extends StateNotifier<ApiState<AppUser>> {
-  CurrentUserNotifier() : super(const ApiState.initial());
+  CurrentUserNotifier() : super(const ApiState.initial()) {
+    getUser();
+  }
+  StreamSubscription<DocumentSnapshot<Object?>>? streamSub;
   Future<void> getUser() async {
     state = const ApiState.loading();
     try {
-      final DocumentSnapshot<Object?> response = await AppFBC.usersCollection
+      streamSub = AppFBC.usersCollection
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .get();
-      if (response.exists && response.data() != null) {
+          .snapshots()
+          .listen((event) {
         state = ApiState.loaded(
-          data: AppUser.fromMap(response.data()! as Map<String, dynamic>)
-              ,
+          data: AppUser.fromMap(event.data()! as Map<String, dynamic>),
         );
-      }
-
+      });
     } catch (e) {
+      debugPrint(e.toString());
       state = ApiState.error(error: NetworkExceptions.getErrorMsg(e));
     }
+  }
+
+  @override
+  void dispose() {
+    if (streamSub != null) {
+      streamSub!.cancel();
+    }
+    super.dispose();
   }
 }
